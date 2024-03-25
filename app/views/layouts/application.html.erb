@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FutureDashboard</title>
+    <title>Dashboard</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   </head>
 
-  <body>
-      <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+  <%= render "layouts/shared/menu/navbar" %>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+  <body class="container">
+    <br>
     <%= yield %>
+    <%= render "layouts/shared/bootstrap_js" %>
+    <%= render "layouts/shared/menu/footer" %>
   </body>
 </html>

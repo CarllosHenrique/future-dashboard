@@ -1,0 +1,33 @@
+pt-BR:
+  dashboard: "Painel"
+  submit: "Enviar"
+  back: "Voltar"
+  edit: "Editar"
+  delete: "Excluir"
+  controller:
+    users: "Usuários"
+  user:
+    registered: "Usuários cadastrados"
+    details: "Detalhes do usuário"
+    new: "Novo usuário"
+    definitions: "Definições do usuário %{name}"
+    join_in: "juntou-se ao clube em"
+    attributes:
+        name: "Nome completo"
+        created_at: "Data de cadastro"
+        updated_at: "Data de atualização"
+        username: "Nome de usuário"
+        birthdate: "Data de nascimento"
+        phone: "Telefone"
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha" 
+  action:
+    success:
+      created: "%{model} criado com sucesso"
+      updated: "%{model} atualizado com sucesso"
+      deleted: "%{model} excluído com sucesso"
+    error:
+      created: "Erro ao criar %{model}"
+      updated: "Erro ao atualizar %{model}"
+      deleted: "Erro ao excluir %{model}"

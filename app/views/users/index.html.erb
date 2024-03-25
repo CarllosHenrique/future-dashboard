@@ -1,0 +1,27 @@
+<h1 class="text-center"><%= t('user.registered') %></h1>
+<div class="container py-5 h-100">
+   <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <%= link_to t('user.new'), new_user_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm' %>
+         </div>
+         <br>
+         <% @users.each do |user| %>
+            <div class="card mb-5" style="border-radius: 15px;">
+               <div class="card-body p-4">
+                  <h3 class="mb-3"><%= user.name %></h3>
+                  <p class="small mb-0"><i class="far fa-star fa-lg"></i> <span class="mx-2">|</span>
+               <strong><%= user.name %></strong> <%= t('user.join_in') %> <strong><%= user.created_at.strftime('%d/%m/%Y') %></strong>
+                  </p>
+                  <hr class="my-4">
+                  <div class="d-flex justify-content-start align-items-center">
+                     <a href="#" class="mb-0 text-uppercase text-decoration-none" data-bs-toggle="modal" data-bs-target="#<%= user.to_param %>" data-bs-whatever="@mdo"><i class="fas fa-cog me-2"></i> <span class="text-muted small"><%= t('user.definitions', name: user.name) %></span></a>
+                  </div>
+               </div>
+            </div>
+            <%= render "user", user: user %>
+         <% end %>
+      </div>
+   </div>
+</div>
+

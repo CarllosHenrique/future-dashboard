@@ -1,0 +1,47 @@
+<div class="modal fade" id="<%= user.to_param %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><%= t('user.definitions', name: user.name) %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" disabled value="<%= user.name %>">
+            <span class="input-group-text">@</span>
+            <input type="text" class="form-control" disabled value="<%= user.username %>">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><%= t('user.attributes.email') %></span>
+            <input type="text" class="form-control" disabled value="<%= user.email %>" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><%= t('user.attributes.phone') %></span>
+            <input type="text" class="form-control" disabled value="<%= user.phone %>" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><%= t('user.attributes.birthdate') %></span>
+            <input type="text" class="form-control" disabled value="<%= user.birthdate.strftime('%d/%m/%Y') %>" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><%= t('user.attributes.created_at') %></span>
+            <input type="text" class="form-control" disabled value="<%= user.created_at.strftime('%d/%m/%Y') %>" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><%= t('user.attributes.updated_at') %></span>
+            <input type="text" class="form-control" disabled value="<%= user.updated_at.strftime('%d/%m/%Y') %>" aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <%= link_to edit_user_path(user), class: "d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" do %>
+              <i class="fa-solid fa-pen"></i> <%= t('edit') %>
+            <% end %>
+            <%= link_to user_path(user), data: { turbo_method: :delete }, class: "d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" do %>
+              <i class="fa-solid fa-trash-can"></i> <%= t('delete') %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
