@@ -6,6 +6,7 @@ pt-BR:
   delete: "Excluir"
   controller:
     users: "Usuários"
+    portfolio: "Carteira"
   user:
     registered: "Usuários cadastrados"
     details: "Detalhes do usuário"
@@ -26,7 +27,14 @@ pt-BR:
         phone: "Telefone"
         email: "E-mail"
         password: "Senha"
-        password_confirmation: "Confirmação de senha" 
+        password_confirmation: "Confirmação de senha"
+  portfolio:
+    attributes:
+      name: "Nome do portfólio"
+      applied_value: "Valor aplicado"
+      gross_balance: "Saldo bruto"
+      total_dividends: "Total de dividendos"
+
   action:
     success:
       created: "%{model} criado com sucesso"
