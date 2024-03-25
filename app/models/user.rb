@@ -27,14 +27,19 @@ class User < ApplicationRecord
   rolify
 
   after_create :assign_default_role
+  before_validation :validate_birthdate
 
   devise(
     :database_authenticatable,
     :recoverable,
     :rememberable,
-    :validatable,
-    :registerable
+    :validatable
   )
+
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: true
+  validates :phone, presence: true, uniqueness: true
+  validates :birthdate, presence: true
 
   def current_role
     roles&.first
@@ -49,15 +54,17 @@ class User < ApplicationRecord
     add_role(role)
   end
 
-  def super_admin?
-    has_role?(:super_admin)
-  end
-
   def admin?
     has_role?(:admin)
   end
 
   def assign_default_role
     add_role(:partner) if roles.blank?
+  end
+
+  def validate_birthdate
+    return if birthdate.blank?
+
+    errors.add(:birthdate, "can't be greater than today's date") if birthdate > Date.today
   end
 end
