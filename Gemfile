@@ -16,6 +16,8 @@ gem 'puma', '>= 5.0'
 
 gem 'rails-i18n', '~> 7.0.0'
 
+gem 'friendly_id', '~> 5.5.0'
+
 gem "acts_as_hashids"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -23,6 +25,14 @@ gem 'importmap-rails'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails'
+
+gem 'devise', '~> 4.9'
+
+gem "dockerfile-rails", ">= 1.6", group: :development
+
+gem "pundit", "~> 2.3"
+
+gem 'rolify', '~> 5.0'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails'
@@ -65,7 +75,3 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-
-gem 'devise', '~> 4.9'
-
-gem "dockerfile-rails", ">= 1.6", group: :development
