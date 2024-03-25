@@ -16,7 +16,7 @@ en:
       name: "Full Name"
       created_at: "Creation Date"
       updated_at: "Update Date"
-      username: "Username"
+      slug: "Username"
       birthdate: "Birthdate"
       phone: "Phone"
       email: "Email"

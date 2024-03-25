@@ -11,7 +11,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
-#  username               :string           default(""), not null
+#  slug                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -19,9 +19,45 @@
 #
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_slug                  (slug) UNIQUE
 #
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable, :validatable
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+  rolify
+
+  after_create :assign_default_role
+
+  devise(
+    :database_authenticatable,
+    :recoverable,
+    :rememberable,
+    :validatable,
+    :registerable
+  )
+
+  def current_role
+    roles&.first
+  end
+
+  def role
+    roles&.order(:id)&.first&.name
+  end
+
+  def role_add(role)
+    roles.destroy_all
+    add_role(role)
+  end
+
+  def super_admin?
+    has_role?(:super_admin)
+  end
+
+  def admin?
+    has_role?(:admin)
+  end
+
+  def assign_default_role
+    add_role(:partner) if roles.blank?
+  end
 end

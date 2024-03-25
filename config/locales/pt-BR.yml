@@ -16,7 +16,7 @@ pt-BR:
         name: "Nome completo"
         created_at: "Data de cadastro"
         updated_at: "Data de atualização"
-        username: "Nome de usuário"
+        slug: "Nome de usuário"
         birthdate: "Data de nascimento"
         phone: "Telefone"
         email: "E-mail"
