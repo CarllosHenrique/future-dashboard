@@ -1,0 +1,14 @@
+<h1 class="text-center"><%= t('controller.contributions') %></h1>
+<br>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <%= link_to t('contribution.new'), new_contribution_path, class: 'btn btn-sm btn-primary shadow-sm' %>
+</div>
+<br>
+<div class="container-xxl">
+  <div class="list-group">
+    <% @contributions.each do |contribution| %>
+      <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#<%= contribution.to_param %>" data-bs-whatever="@mdo"><%= number_to_currency(contribution.value) %></a>
+      <%= render "contribution", contribution: contribution %>
+    <% end %>
+  </div>
+</div>

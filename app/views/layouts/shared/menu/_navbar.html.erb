@@ -12,9 +12,12 @@
             <a class="nav-link  <%= 'active' if current_page?(users_path) %>" aria-current="page" href="<%= users_path %>"><i class="fa-solid fa-user-group"></i> <%= t('controller.users') %></a>
           </li>
         <% end %>
-        <li class="nav-item">
-          <a class="nav-link  <%= 'active' if current_page?(portfolio_path) %>" aria-current="page" href="<%= portfolio_path %>"><i class="fa-solid fa-wallet"></i> <%= t('controller.portfolio') %></a>
-        </li>
+
+        <% if current_user.has_role?(:admin) %>
+          <li class="nav-item">
+            <a class="nav-link  <%= 'active' if current_page?(contributions_path) %>" aria-current="page" href="<%= contributions_path %>"><i class="fa-solid fa-sack-dollar"></i> <%= t('controller.contributions') %></a>
+          </li>
+        <% end %>
       </ul>
       <div class="d-flex">
       </div>

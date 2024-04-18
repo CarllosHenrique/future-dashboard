@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users
-  resource :portfolio
+
+  resources :contributions
 end

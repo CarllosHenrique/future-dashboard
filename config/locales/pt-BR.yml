@@ -6,7 +6,8 @@ pt-BR:
   delete: "Excluir"
   controller:
     users: "Usuários"
-    portfolio: "Carteira"
+    portfolios: "Carteira"
+    contributions: "Aportes de capital"
   user:
     registered: "Usuários cadastrados"
     details: "Detalhes do usuário"
@@ -34,6 +35,11 @@ pt-BR:
       applied_value: "Valor aplicado"
       gross_balance: "Saldo bruto"
       total_dividends: "Total de dividendos"
+  contribution:
+    new: "Novo aporte"
+    attributes:
+      value: "Valor do aporte"
+      date: "Data do aporte"
 
   action:
     success:

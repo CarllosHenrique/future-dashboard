@@ -20,6 +20,8 @@ gem 'friendly_id', '~> 5.5.0'
 
 gem "acts_as_hashids"
 
+gem "rails_charts"
+
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
 
