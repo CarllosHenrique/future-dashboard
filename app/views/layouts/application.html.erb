@@ -13,11 +13,15 @@
   </head>
 
   <%= render "layouts/shared/menu/navbar" %>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+
 
   <body class="container">
     <br>
+    <br>
+    <br>
+    <br>
+    <%= render 'layouts/shared/notification/alert' %>
+    <%= render 'layouts/shared/notification/notice' %>
     <%= yield %>
     <%= render "layouts/shared/bootstrap_js" %>
     <%= render "layouts/shared/menu/footer" %>
