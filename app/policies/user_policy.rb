@@ -1,10 +1,12 @@
 # Author: Ramashish Gaur
 class UserPolicy < ApplicationPolicy
   include PolicyRules::Admin
+  include PolicyRules::Partner
 
   # Scope class for UserPolicy
   class Scope < Scope
     include PolicyRules::Admin
+    include PolicyRules::Partner
 
     PolicyRules::Admin.instance_methods.each { |m| undef_method(m) if m != 'admin?' }
 
@@ -22,11 +24,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    admin?
+    partner? || admin?
   end
 
   def edit?
-    admin?
+    partner? || admin?
   end
 
   def create?
@@ -35,5 +37,15 @@ class UserPolicy < ApplicationPolicy
 
   def destroy?
     admin?
+  end
+
+  def new?
+    admin?
+  end
+
+  private
+
+  def partner?
+    is_partner?
   end
 end

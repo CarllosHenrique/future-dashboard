@@ -34,8 +34,12 @@ class UsersController < ApplicationController
   def update
     authorize @user
     if @user.update(user_params.except(:role))
-      @user.role_add(user_params[:role])
-      redirect_to users_path, notice: t('action.success.updated', model: @user.name)
+      @user.role_add(user_params[:role]) if user_params[:role].present?
+      if current_user.has_role?(:admin)
+        redirect_to users_path, notice: t('action.success.updated', model: @user.name)
+      else
+        redirect_to root_path, notice: t('action.success.updated', model: @user.name)
+      end
     else
       render :edit, status: :unprocessable_entity
     end

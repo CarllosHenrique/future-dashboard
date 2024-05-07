@@ -3,6 +3,7 @@ pt-BR:
   submit: "Enviar"
   back: "Voltar"
   edit: "Editar"
+  sign_out: "Sair"
   delete: "Excluir"
   controller:
     users: "Usuários"

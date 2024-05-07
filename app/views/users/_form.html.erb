@@ -7,15 +7,17 @@
   
   <div class="mb-3">
     <%= form.label :email, t('user.attributes.email'), class: "form-label" %>
-    <%= form.email_field :email, class: "form-control"%>
+    <%= form.email_field :email, class: "form-control", disabled: !current_user.has_role?(:admin) %>
     <%= form_model_errors(user, :email) %>
   </div>
   
-  <div class="mb-3">
-    <%= form.label :password, t('user.attributes.password'), class: "form-label" %>
-    <%= form.password_field :password, class: "form-control"%>
-    <%= form_model_errors(user, :password) %>
-  </div>
+  <% if current_user.has_role?(:admin) %>
+    <div class="mb-3">
+      <%= form.label :password, t('user.attributes.password'), class: "form-label" %>
+      <%= form.password_field :password, class: "form-control"%>
+      <%= form_model_errors(user, :password) %>
+    </div>
+  <% end %>
   
   <div class="row">
     <div class="col">
@@ -34,11 +36,12 @@
   <% if action_name == "edit" %>
     <div class="col">
       <%= form.label :role, t('user.attributes.role'), class: "form-label" %>
-      <%= form.select :role, options_for_select(Role::ROLES_NAMES.map { |role| [role.humanize, role] }, form.object.role),
-      {}, { class: "form-select" } %>
+      <%= form.select :role, options_for_select(Role::ROLES_NAMES.map { |role| [t("user.permission.role.#{role}"), role] }, form.object.role),
+      {}, { class: "form-select", disabled: !current_user.has_role?(:admin) } %>
       <%= form_model_errors(user, :role) %>
     </div>
   <% end %>
+
   
   <br>
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">

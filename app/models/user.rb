@@ -36,9 +36,11 @@ class User < ApplicationRecord
     :validatable
   )
 
-  validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
-  validates :phone, presence: true, uniqueness: true
+  validates :name, presence: true, length: { minimum: 3, maximum: 40 }
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP },
+                    length: { minimum: 3, maximum: 50 }
+  validates :phone, presence: true, uniqueness: true, format: { with: /\A\+?[0-9]{10,15}\z/ },
+                    length: { minimum: 10, maximum: 15 }
   validates :birthdate, presence: true
 
   def current_role

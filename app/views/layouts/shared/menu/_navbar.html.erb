@@ -9,17 +9,30 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <% if current_user.has_role?(:admin) %>
           <li class="nav-item">
-            <a class="nav-link  <%= 'active' if current_page?(users_path) %>" aria-current="page" href="<%= users_path %>"><i class="fa-solid fa-user-group"></i> <%= t('controller.users') %></a>
+            <a class="nav-link  <%= 'active' if current_page?(users_path) %>" aria-current="page" href="<%= users_path %>"><%= t('controller.users') %></a>
           </li>
         <% end %>
 
         <% if current_user.has_role?(:admin) %>
           <li class="nav-item">
-            <a class="nav-link  <%= 'active' if current_page?(contributions_path) %>" aria-current="page" href="<%= contributions_path %>"><i class="fa-solid fa-sack-dollar"></i> <%= t('controller.contributions') %></a>
+            <a class="nav-link  <%= 'active' if current_page?(contributions_path) %>" aria-current="page" href="<%= contributions_path %>"><%= t('controller.contributions') %></a>
           </li>
         <% end %>
       </ul>
       <div class="d-flex">
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" style="color: #ffffff;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= current_user.name %>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="<%= edit_user_path(current_user)%>"><i class="fa-solid fa-user-edit"></i> <%= t('edit') %></a></li>
+            <li>
+              <%= link_to destroy_user_session_path, class:"dropdown-item", data: { turbo_method: :delete } do %>
+                <i class="fa-solid fa-sign-out"></i> <%= t('sign_out') %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
