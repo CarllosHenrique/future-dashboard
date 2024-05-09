@@ -14,12 +14,18 @@
 #  slug                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  portfolio_id           :bigint
 #
 # Indexes
 #
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_portfolio_id          (portfolio_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_slug                  (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (portfolio_id => portfolios.id)
 #
 class User < ApplicationRecord
   extend FriendlyId
@@ -28,6 +34,9 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
   before_validation :validate_birthdate
+
+  has_many :contributions
+  belongs_to :portfolio
 
   devise(
     :database_authenticatable,
@@ -42,6 +51,7 @@ class User < ApplicationRecord
   validates :phone, presence: true, uniqueness: true, format: { with: /\A\+?[0-9]{10,15}\z/ },
                     length: { minimum: 10, maximum: 15 }
   validates :birthdate, presence: true
+  validates :portfolio, presence: true
 
   def current_role
     roles&.first
@@ -59,6 +69,12 @@ class User < ApplicationRecord
   def admin?
     has_role?(:admin)
   end
+
+  def partner?
+    has_role?(:partner)
+  end
+
+  private
 
   def assign_default_role
     add_role(:partner) if roles.blank?

@@ -28,7 +28,7 @@ module PolicyRules
     end
 
     def is_partner? # rubocop:disable Naming/PredicateName
-      @user.has_role?(:partner)
+      @user.partner?
     end
   end
 end

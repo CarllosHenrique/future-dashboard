@@ -1,0 +1,20 @@
+<%= form_with(model: contribution, local: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label t('contribution.attributes.value'), class: "form-label" %>
+    <%= form.number_field :value, class: "form-control" %>
+    <%= form_model_errors(@contribution, :value) %>
+  </div>
+
+  <% if current_user.admin? %>
+    <div class="form-check form-switch">
+      <%= form.check_box :status, { class: "form-check-input", id: "contribution_status" }, true, false %>
+      <%= form.label :alredy_approved?, t('contribution.attributes.alredy_approved?'), class: "form-check-label", for: "contribution_status" %>
+    </div>
+  <% end %>
+
+  
+  <br>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <%= form.submit t('submit'), class: "btn btn-sm btn-primary shadow-sm" %>
+  </div>
+<% end %>

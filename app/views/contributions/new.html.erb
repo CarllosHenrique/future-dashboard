@@ -1,13 +1,1 @@
-<%= form_with(model: @contribution, local: true) do |form| %>
-  <div class="mb-3">
-    <%= form.label t('contribution.attributes.value'), class: "form-label" %>
-    <%= form.number_field :value, class: "form-control" %>
-    <%= form_model_errors(@contribution, :value) %>
-  </div>
-  
-  
-  <br>
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <%= form.submit t('submit'), class: "btn btn-sm btn-primary shadow-sm" %>
-  </div>
-<% end %>
+<%= render "contributions/form", contribution: @contribution %>

@@ -7,11 +7,11 @@
   
   <div class="mb-3">
     <%= form.label :email, t('user.attributes.email'), class: "form-label" %>
-    <%= form.email_field :email, class: "form-control", disabled: !current_user.has_role?(:admin) %>
+    <%= form.email_field :email, class: "form-control", disabled: !current_user.admin? %>
     <%= form_model_errors(user, :email) %>
   </div>
   
-  <% if current_user.has_role?(:admin) %>
+  <% if current_user.admin? %>
     <div class="mb-3">
       <%= form.label :password, t('user.attributes.password'), class: "form-label" %>
       <%= form.password_field :password, class: "form-control"%>
@@ -33,14 +33,22 @@
     </div>
   </div>
 
-  <% if action_name == "edit" %>
-    <div class="col">
-      <%= form.label :role, t('user.attributes.role'), class: "form-label" %>
-      <%= form.select :role, options_for_select(Role::ROLES_NAMES.map { |role| [t("user.permission.role.#{role}"), role] }, form.object.role),
-      {}, { class: "form-select", disabled: !current_user.has_role?(:admin) } %>
-      <%= form_model_errors(user, :role) %>
-    </div>
-  <% end %>
+  <div class="row">
+    <% if action_name == "edit" %>
+      <div class="col">
+        <%= form.label :role, t('user.attributes.role'), class: "form-label" %>
+        <%= form.select :role, options_for_select(Role::ROLES_NAMES.map { |role| [t("user.permission.role.#{role}"), role] }, form.object.role),
+        {}, { class: "form-select", disabled: !current_user.admin? } %>
+        <%= form_model_errors(user, :role) %>
+      </div>
+    <% end %>
+  
+      <div class="col">
+        <%= form.label :portfolio_id, t('user.attributes.portfolio'), class: "form-label" %>
+        <%= form.select :portfolio_id, options_for_select(Portfolio.all.map { |portfolio| [portfolio.name, portfolio.id] } , form.object.portfolio), {}, { class: "form-select", disabled: !current_user.admin? } %>
+        <%= form_model_errors(user, :portfolio_id) %>
+      </div>
+  </div>
 
   
   <br>

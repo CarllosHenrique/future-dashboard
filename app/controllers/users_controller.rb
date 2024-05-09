@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     authorize @user
     if @user.update(user_params.except(:role))
       @user.role_add(user_params[:role]) if user_params[:role].present?
-      if current_user.has_role?(:admin)
+      if current_user.admin?
         redirect_to users_path, notice: t('action.success.updated', model: @user.name)
       else
         redirect_to root_path, notice: t('action.success.updated', model: @user.name)
@@ -67,6 +67,6 @@ class UsersController < ApplicationController
       params[:user].delete :password_confirmation
     end
 
-    params.require(:user).permit(:name, :slug, :email, :password, :birthdate, :phone, :role)
+    params.require(:user).permit(:name, :slug, :email, :password, :birthdate, :phone, :role, :portfolio_id)
   end
 end

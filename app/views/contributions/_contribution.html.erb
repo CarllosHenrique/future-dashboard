@@ -14,6 +14,23 @@
           <span class="input-group-text" id="basic-addon1"><%= t('contribution.attributes.date') %></span>
           <input type="text" class="form-control" disabled value="<%= contribution.created_at.strftime('%d/%m/%Y') %>" aria-describedby="basic-addon1">
         </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><%= t('contribution.attributes.portfolio') %></span>
+          <input type="text" class="form-control" disabled value="<%= contribution.portfolio.name %>" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><%= t('contribution.attributes.user') %></span>
+          <input type="text" class="form-control" disabled value="<%= contribution.user.name %>" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><%= t('contribution.attributes.status') %></span>
+          <input type="text" class="form-control" disabled value="<%= contribution.status %>" aria-describedby="basic-addon1">
+          <% unless contribution.status %>
+            <%= button_to approve_contribution_path(contribution), class: "btn btn-success", method: :patch do %>
+              <i class="fa-solid fa-check"></i>
+            <% end %>
+          <% end %>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

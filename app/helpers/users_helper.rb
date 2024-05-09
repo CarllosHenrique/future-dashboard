@@ -1,9 +1,9 @@
 # Helper for users
 module UsersHelper
   def user_role(user)
-    if user.has_role?(:admin)
+    if user.admin?
       t('user.permission.role.admin')
-    elsif user.has_role?(:partner)
+    elsif user.partner?
       t('user.permission.role.partner')
     end
   end

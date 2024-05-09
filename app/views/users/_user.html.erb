@@ -35,6 +35,10 @@
             <span class="input-group-text" id="basic-addon1"><%= t('user.attributes.role') %></span>
             <input type="text" class="form-control" disabled value="<%= user_role(user) %>" aria-describedby="basic-addon1">
           </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><%= t('user.attributes.portfolio') %></span>
+            <input type="text" class="form-control" disabled value="<%= user.portfolio.name %>" aria-describedby="basic-addon1">
+          </div>
         </div>
         <div class="modal-footer">
           <div class="d-grid gap-2 d-md-flex justify-content-md-end">

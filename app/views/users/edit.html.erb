@@ -2,7 +2,7 @@
 <%= render "users/form", user: @user %>
 <br>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <% if current_user.has_role?(:admin) %>
+  <% if current_user.admin? %>
     <%= link_to users_path, class: "btn btn-sm btn-secondary shadow-sm" do %>
       <i class="fa-solid fa-arrow-left"></i> <%= t('back') %>
     <% end %>

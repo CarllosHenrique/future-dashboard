@@ -1,14 +1,26 @@
 <h1 class="text-center"><%= t('controller.contributions') %></h1>
 <br>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <%= link_to t('contribution.new'), new_contribution_path, class: 'btn btn-sm btn-primary shadow-sm' %>
+  <%= link_to t('contribution.approve_all'), approve_all_contributions_path, class: 'btn btn-sm btn-success shadow-sm', data: { turbo_method: :patch } %>
+  <%= link_to t('contribution.new'), new_contribution_path, class: 'btn btn-sm btn-primary shadow-sm'%>
 </div>
 <br>
-<div class="container-xxl">
-  <div class="list-group">
-    <% @contributions.each do |contribution| %>
-      <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#<%= contribution.to_param %>" data-bs-whatever="@mdo"><%= number_to_currency(contribution.value) %></a>
-      <%= render "contribution", contribution: contribution %>
-    <% end %>
-  </div>
-</div>
+
+
+<ol class="list-group list-group-numbered">
+  <% @contributions.each do |contribution| %>
+    <li class="list-group-item d-flex justify-content-between align-items-start" data-bs-toggle="modal" data-bs-target="#<%= contribution.to_param %>" data-bs-whatever="@mdo" style="cursor: pointer;">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold"><%= contribution.user.name %></div>
+          <%= number_to_currency(contribution.value) %>
+          <%= render "contribution", contribution: contribution %>
+      </div>
+      
+      <% if contribution.status %>
+        <span class="badge bg-success rounded-pill"><i class="fa-solid fa-check"></i></span>
+      <% else %>
+        <span class="badge bg-danger rounded-pill"><i class="fa-solid fa-triangle-exclamation"></i></span>
+      <% end %>
+    </li>
+  <% end %>
+</ol>

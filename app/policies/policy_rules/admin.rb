@@ -28,7 +28,7 @@ module PolicyRules
     end
 
     def is_admin? # rubocop:disable Naming/PredicateName
-      @user.has_role?(:admin)
+      @user.admin?
     end
   end
 end

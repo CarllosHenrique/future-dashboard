@@ -1,6 +1,6 @@
 # This controller is responsible for rendering the home page.
 class HomeController < ApplicationController
   def index
-    @portfolio = Portfolio.first
+    @contribution = Contribution.new
   end
 end

@@ -1,7 +1,9 @@
 <div class="container-fluid">
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+         <button type="button" class="btn btn-sm btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#create_contribution_alert" data-bs-whatever="@mdo">Criar um alerta de aporte</button>
+      </div>
    </div>
    <div class="row">
       <div class="col-xl-3 col-md-6 mb-4">
@@ -12,27 +14,46 @@
                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         <%= t('portfolio.attributes.applied_value')%>
                      </div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800"><%= number_to_currency(@portfolio.applied_value) %></div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800"><%= approved_applied_value %></div>
                   </div>
                   <div class="col-auto">
-                     <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                     <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                   </div>
                </div>
             </div>
          </div>
       </div>
+      <% if Contribution.where(status: false, user: current_user).any? %>
+         <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+               <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                     <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                           Saldo pendente
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold fw-lighter"><%= pending_applied_value %></div>
+                     </div>
+                     <div class="col-auto">
+                        <i class="fas fa-clock fa-2x text-gray-300"></i>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      <% end %>
       <div class="col-xl-3 col-md-6 mb-4">
          <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body">
                <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                        <%= t('portfolio.attributes.gross_balance')%>
+                        Participação
                      </div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800"><%= number_to_currency(@portfolio.gross_balance) %></div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800">1.2%</div>
                   </div>
                   <div class="col-auto">
-                     <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                     <i class="fas fa-users fa-2x text-gray-300"></i>
                   </div>
                </div>
             </div>
@@ -46,10 +67,10 @@
                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                         Ultima atualização
                      </div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800"><%= @portfolio.updated_at.strftime('%d/%m/%Y') %></div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800"><%= Contribution.where(user: current_user).last.updated_at.strftime('%d/%m/%Y') if Contribution.where(user: current_user).last %></div>
                   </div>
                   <div class="col-auto">
-                     <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                     <i class="fas fa-calendar fa-2x text-gray-300"></i>
                   </div>
                </div>
             </div>
@@ -64,7 +85,7 @@
             </div>
             <div class="card-body">
                <div class="chart-area">
-                  <%= line_chart Contribution.pluck(:created_at, :value), id: "myAreaChart" %>
+                  <%= line_chart chars_applied_value, id: "myAreaChart" %>
                </div>
             </div>
          </div>
@@ -83,3 +104,4 @@
       </div>
    </div>
 </div>
+<%= render "contributions/create_contribution_alert" %>
