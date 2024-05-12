@@ -8,7 +8,7 @@ class UserSeeds < Seeds::Base
                     password: ENV.fetch("DEFAULT_ADMIN_PASSWORD"),
                     portfolio_id: Portfolio.first.id
     user.save!
-    user.role_add(:admin)
+    user.add_role(:admin)
 
     puts "#{self.class} - Created user: #{user.name} - #{user.email}"
   end
