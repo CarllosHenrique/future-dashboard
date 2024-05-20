@@ -1,4 +1,4 @@
-<h1 class="text-center"><%= t('controller.contributions') %></h1>
+<h1 class="text-center"><%= back_button root_path, "left" %> <%= t('controller.contributions') %></h1>
 <br>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
   <%= link_to t('contribution.approve_all'), approve_all_contributions_path, class: 'btn btn-sm btn-success shadow-sm', data: { turbo_method: :patch } %>

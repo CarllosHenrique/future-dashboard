@@ -1,4 +1,4 @@
-<h1 class="text-center"><%= t('user.registered') %></h1>
+<h1 class="text-center"><%= back_button root_path, "left" %><%= t('user.registered') %></h1>
 <div class="container py-5 h-100">
    <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col col-xl-10">
@@ -6,6 +6,7 @@
             <%= link_to t('user.new'), new_user_path, class: 'btn btn-sm btn-primary shadow-sm' %>
          </div>
          <br>
+         <!-- TODO: Mudar o estilo de lista que mostra todos os usuarios -->
          <% @users.each do |user| %>
             <div class="card mb-5" style="border-radius: 15px;">
                <div class="card-body p-4">

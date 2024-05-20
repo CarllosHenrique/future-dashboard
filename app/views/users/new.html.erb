@@ -1,8 +1,4 @@
-<h1 class="text-center"><%= t('user.new') %></h1>
-<%= render "users/form", user: @user %>
+
+<h1 class="text-center"><%= back_button users_path, "left" %> <%= t('user.new') %></h1>
 <br>
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <%= link_to users_path, class: "btn btn-sm btn-secondary shadow-sm" do %>
-    <i class="fa-solid fa-arrow-left"></i> <%= t('back') %>
-  <% end %>
-</div>
+<%= render "users/form", user: @user %>

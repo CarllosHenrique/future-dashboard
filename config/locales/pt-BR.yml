@@ -1,5 +1,6 @@
 pt-BR:
   dashboard: "Painel"
+  welcome: "Bem vindo ao Valor Futuro, %{name}!"
   submit: "Enviar"
   back: "Voltar"
   edit: "Editar"
@@ -13,6 +14,7 @@ pt-BR:
     registered: "Usuários cadastrados"
     details: "Detalhes do usuário"
     new: "Novo usuário"
+    edit: "Editar usuário"
     definitions: "Definições do usuário %{name}"
     join_in: "juntou-se ao clube em"
     permission:
@@ -29,7 +31,12 @@ pt-BR:
         phone: "Telefone"
         email: "E-mail"
         password: "Senha"
+        portfolio: "Carteira"
         password_confirmation: "Confirmação de senha"
+    forgot_password:
+      title: "Esqueceu sua senha?"
+      description: "Digite seu e-mail e enviaremos um link para redefinir sua senha."
+      submit: "Enviar link de redefinição de senha"
   portfolio:
     attributes:
       name: "Nome do portfólio"
@@ -38,7 +45,9 @@ pt-BR:
       total_dividends: "Total de dividendos"
   contribution:
     new: "Novo aporte"
+    new_alert: "Criar alerta de novo aporte"
     attributes:
+      alredy_approved?: "Passar sem verificação?"
       value: "Valor do aporte"
       date: "Data do aporte"
 
