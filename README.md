@@ -4,7 +4,7 @@
 ```sh
 git checkout -b [branch]
 git add .
-git commit -m "[X.0.0]: description"
+git commit -m "[DSH]:[X.0.0]: description"
 git push
 ```
 
