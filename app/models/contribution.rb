@@ -29,6 +29,8 @@ class Contribution < ApplicationRecord
   validates :value, presence: true, numericality: { greater_than: 0 }
   validates :value, numericality: { less_than_or_equal_to: 1_000_000_000 }
 
+  private
+
   def update_portfolio_applied_value
     if Contribution.count >= 1
       Portfolio.update(applied_value: Contribution.sum(:value))

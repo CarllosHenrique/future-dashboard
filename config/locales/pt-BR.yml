@@ -17,6 +17,8 @@ pt-BR:
     edit: "Editar usuário"
     definitions: "Definições do usuário %{name}"
     join_in: "juntou-se ao clube em"
+    personal_information: "Informações pessoais"
+    investment_information: "Informações de investidor"
     permission:
       role:
         admin: "Administrador"
@@ -46,6 +48,8 @@ pt-BR:
   contribution:
     new: "Novo aporte"
     new_alert: "Criar alerta de novo aporte"
+    waiting_approval: "Aguardando aprovação de um gestor"
+    successfully_created: "Novo alerta de aporte criado com sucesso"
     attributes:
       alredy_approved?: "Passar sem verificação?"
       value: "Valor do aporte"

@@ -11,12 +11,14 @@ class ContributionsController < ApplicationController
   def approve
     @contribution = Contribution.find(params[:id])
     @contribution.update(status: true)
+    @contribution.user.update(participation: @contribution.user.user_participation)
     redirect_to contributions_path
   end
 
   def approve_all
     Contribution.all.each do |contribution|
       contribution.update(status: true)
+      contribution.user.update(participation: contribution.user.user_participation)
     end
     redirect_to contributions_path
   end
@@ -30,7 +32,8 @@ class ContributionsController < ApplicationController
         @contribution.update_portfolio_applied_value
         redirect_to contributions_path
       else
-        flash[:notice] = 'Contribution created successfully, waiting for approval'
+        flash[:notice] = t('contribution.successfully_created')
+        flash[:alert] = t('contribution.waiting_approval')
         redirect_to root_path
       end
     else
