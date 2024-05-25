@@ -7,6 +7,7 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  name                   :string           default(""), not null
+#  participation          :float            default(0.0)
 #  phone                  :string           default(""), not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -73,6 +74,18 @@ class User < ApplicationRecord
 
   def partner?
     has_role?(:partner)
+  end
+
+  def balence_approved
+    contributions.where(status: true).sum(:value)
+  end
+
+  def balence_pending
+    contributions.where(status: false).sum(:value)
+  end
+
+  def user_participation
+    (balence_approved / portfolio.applied_value) * 100
   end
 
   private
