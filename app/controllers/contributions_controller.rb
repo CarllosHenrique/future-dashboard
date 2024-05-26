@@ -2,14 +2,18 @@
 class ContributionsController < ApplicationController
   def index
     @contributions = Contribution.all
+    authorize @contributions
   end
 
   def new
     @contribution = Contribution.new
+
+    authorize @contribution
   end
 
   def approve
     @contribution = Contribution.find(params[:id])
+    authorize @contribution
     @contribution.update(status: true)
     @contribution.update_portfolio_applied_value
     @contribution.user.update(participation: @contribution.user.user_participation)
@@ -17,6 +21,8 @@ class ContributionsController < ApplicationController
   end
 
   def approve_all
+    return unless current_user.admin?
+
     Contribution.all.each do |contribution|
       contribution.update(status: true)
       contribution.user.update(participation: contribution.user.user_participation)
@@ -27,6 +33,7 @@ class ContributionsController < ApplicationController
   def create
     @contribution = current_user.contributions.build(contribution_params)
     @contribution.portfolio_id = current_user.portfolio_id
+    authorize @contribution
 
     if @contribution.save
       handle_successful_save

@@ -1,5 +1,5 @@
 # Author: Ramashish Gaur
-class ContributionPolicy < ApplicationPolicy
+class HomePolicy < ApplicationPolicy
   include PolicyRules::Admin
   include PolicyRules::Partner
 
@@ -15,35 +15,7 @@ class ContributionPolicy < ApplicationPolicy
   end
 
   def index?
-    admin?
-  end
-
-  def show?
-    admin?
-  end
-
-  def update?
-    admin?
-  end
-
-  def approve?
-    admin?
-  end
-
-  def edit?
-    admin?
-  end
-
-  def new?
-    admin?
-  end
-
-  def create?
-    admin? || partner?
-  end
-
-  def destroy?
-    admin?
+    partner? || admin?
   end
 
   private
