@@ -76,7 +76,7 @@ class User < ApplicationRecord
     has_role?(:partner)
   end
 
-  def balence_approved
+  def balance_approved
     contributions.where(status: true).sum(:value)
   end
 
@@ -85,7 +85,16 @@ class User < ApplicationRecord
   end
 
   def user_participation
-    (balence_approved / portfolio.applied_value) * 100
+    return 0.0 if portfolio.applied_value.zero?
+
+    self.participation = ((balance_approved / portfolio.applied_value) * 100).round(2)
+  end
+
+  def update_participation!
+    return if portfolio.applied_value.zero?
+
+    user_participation
+    save!
   end
 
   private

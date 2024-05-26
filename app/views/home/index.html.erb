@@ -50,7 +50,7 @@
                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                         Participação
                      </div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800"><%= current_user.participation %>%</div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800"><%= current_user.user_participation %>%</div>
                   </div>
                   <div class="col-auto">
                      <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -59,6 +59,7 @@
             </div>
          </div>
       </div>
+      <% if Contribution.where(user: current_user).last %>
       <div class="col-xl-3 col-md-6 mb-4">
          <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body">
@@ -76,6 +77,7 @@
             </div>
          </div>
       </div>
+      <% end %>
    </div>
    <div class="row">
       <div class="col-xl-8 col-lg-7">
@@ -93,11 +95,11 @@
       <div class="col-xl-4 col-lg-5">
          <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-               <h6 class="m-0 font-weight-bold text-primary">Total Portfolio</h6>
+               <h6 class="m-0 font-weight-bold text-primary">Portfolio</h6>
             </div>
             <div class="card-body">
                <div class="chart-pie pt-4 pb-2">
-                  <%= donut_chart Portfolio.group(:applied_value).count, id: "myPieChart" %>
+                  <%= donut_chart donut_chart_data, id: "myPieChart", options: { legend: { orient: 'vertical', left: 'left' } } %>
                </div>
             </div>
          </div>

@@ -11,6 +11,7 @@ class ContributionsController < ApplicationController
   def approve
     @contribution = Contribution.find(params[:id])
     @contribution.update(status: true)
+    @contribution.update_portfolio_applied_value
     @contribution.user.update(participation: @contribution.user.user_participation)
     redirect_to contributions_path
   end

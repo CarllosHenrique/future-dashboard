@@ -16,4 +16,12 @@ class Portfolio < ApplicationRecord
 
   has_many :contributions, dependent: :destroy
   has_many :users, dependent: :destroy
+
+  after_save :recalculate_user_participation, if: :saved_change_to_applied_value?
+
+  private
+
+  def recalculate_user_participation
+    users.find_each(&:update_participation!)
+  end
 end
