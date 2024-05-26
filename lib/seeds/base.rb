@@ -1,7 +1,8 @@
 module Seeds
+  # Base class for all seed classes
   class Base
     def self.call(*attributes)
-      obj = self.new(*attributes)
+      obj = new(*attributes)
       obj.call
     end
 

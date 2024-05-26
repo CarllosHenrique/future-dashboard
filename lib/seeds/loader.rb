@@ -1,4 +1,5 @@
 module Seeds
+  # Loader class for all seed classes
   class Loader
     def self.all
       return if Rails.env.test?
@@ -47,11 +48,11 @@ module Seeds
 
       yml_data = YAML.load_file(file)
 
-      env = Rails.env.to_s === 'production' ? 'production' : 'dev'
+      env = Rails.env.to_s === 'production' ? 'production' : 'dev' # rubocop:disable Style/CaseEquality
 
       # puts "Rails.env.to_s #{Rails.env.to_s}"
       # puts "env #{env}"
-      return yml_data[env] if yml_data.is_a?(Hash) && yml_data.has_key?(env)
+      return yml_data[env] if yml_data.is_a?(Hash) && yml_data.key?(env)
 
       yml_data
     end

@@ -1,2 +1,6 @@
-<h1 class="text-center"><%= back_button users_path, "left" %> <%= t('user.edit') %></h1>
+<% back_path = current_user.admin? ? users_path : root_path %>
+<h1 class="text-center">
+  <%= back_button back_path, "left" %> 
+  <%= t('user.edit') %>
+</h1>
 <%= render "users/form", user: @user %>

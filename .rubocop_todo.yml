@@ -115,3 +115,4 @@ Layout/LineLength:
   Max: 198
 AllCops:
   SuggestExtensions: false
+  NewCops: disable

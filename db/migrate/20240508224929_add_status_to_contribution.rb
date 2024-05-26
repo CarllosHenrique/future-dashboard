@@ -1,3 +1,4 @@
+# Purpose: Add status column to Contribution table.
 class AddStatusToContribution < ActiveRecord::Migration[7.1]
   def change
     add_column :contributions, :status, :boolean, default: false

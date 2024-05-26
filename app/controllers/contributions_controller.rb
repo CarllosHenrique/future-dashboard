@@ -28,20 +28,24 @@ class ContributionsController < ApplicationController
     @contribution.portfolio_id = current_user.portfolio_id
 
     if @contribution.save
-      if @contribution.status.eql?(true)
-        @contribution.update_portfolio_applied_value
-        redirect_to contributions_path
-      else
-        flash[:notice] = t('contribution.successfully_created')
-        flash[:alert] = t('contribution.waiting_approval')
-        redirect_to root_path
-      end
+      handle_successful_save
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   private
+
+  def handle_successful_save
+    if @contribution.status
+      @contribution.update_portfolio_applied_value
+      redirect_to contributions_path
+    else
+      flash[:notice] = t('contribution.successfully_created')
+      flash[:alert] = t('contribution.waiting_approval')
+      redirect_to root_path
+    end
+  end
 
   def contribution_params
     params.require(:contribution).permit(:value, :user_id, :portfolio_id, :status)

@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     authorize @user
   end
 
-  def update
+  def update # rubocop:disable Metrics/AbcSize
     authorize @user
     if @user.update(user_params.except(:role))
       @user.role_add(user_params[:role]) if user_params[:role].present?
